@@ -1,5 +1,8 @@
 import express from 'express';
-import {getMatchDetail} from './data/source/matches/matchDetail';
+import {
+  getMatchDetail,
+  getPlayerInMatch,
+} from './data/source/matches/matchDetail';
 
 const PORT = 8080;
 
@@ -18,7 +21,10 @@ app.get('/matches/:id', async (req, res) => {
 app.get('/player/:playerId/matches/:matchId', async (req, res) => {
   const params = req.params;
 
-  const detail = await getMatchDetail(Number(params.matchId));
+  const detail = await getPlayerInMatch(
+    Number(params.matchId),
+    Number(params.playerId)
+  );
 
   console.log(detail);
 
